@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const TodoForm = ({ addTodo }) => {
     const [text, setText] = useState('');
-    const [priority, setPriority] = useState('Low');
+    const [priority, setPriority] = useState('None');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -21,11 +21,12 @@ const TodoForm = ({ addTodo }) => {
                 required
             />
             <select value={priority} onChange={(e) => setPriority(e.target.value)}>
+                <option value="None">None</option>
                 <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
                 <option value="High">High</option>
             </select>
-            <button type="submit">Add</button>
+            <button type="submit">+</button>
         </form>
     );
 };

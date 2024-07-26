@@ -1,0 +1,220 @@
+/* App.jsx */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #17181f;
+    color: #ddd;
+}
+
+.App {
+    max-width: 600px;
+    margin: 20px auto;
+    border: 3px solid #fff;
+}
+
+/* Form */
+
+form {
+    border: 3px solid #30313D;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+form input[type="text"] {
+    background: none;
+    color: #fff;
+    border: 0;
+    padding: 0 8px;
+    display: block;
+    width: 100%;
+}
+
+form input[type="text"]:focus {
+    outline: none;
+}
+
+select {
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid #3b3c4c;
+    padding: 0 8px;
+    display: block;
+}
+
+option {
+    background-color: #000;
+}
+
+form button {
+    background-color: #61DAFB;
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+/* List */
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+
+
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.todo-details {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.todo-details span {
+    flex: 1;
+}
+
+.todo-details select {
+    width: auto;
+    margin-left: 10px;
+}
+
+.todo-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.todo-actions button {
+    background-color: #61DAFB;
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+@media (max-width: 600px) {
+    .App {
+        padding: 10px;
+    }
+
+    .todo-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .todo-details {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    input[type="text"],
+    select,
+    button {
+        width: 100%;
+        margin: 5px 0;
+    }
+}
+
+
+
+
+
+
+
+
+div.task {
+    background-color: #30313D;
+    border-radius: 10px;
+    padding: 5px 9px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    transition: opacity .3s linear;
+}
+
+div.task svg {
+    height: 20px;
+    margin-right: 6px;
+    fill: #61DAFB;
+}
+
+div.task.done {
+    opacity: 0.3;
+}
+
+div.task-name,
+div.task form {
+    flex-grow: 1;
+}
+
+div.task span {
+    position: relative;
+}
+
+div.task span:before {
+    content: '';
+    display: block;
+    width: 0;
+    height: 1px;
+    background-color: #ddd;
+    position: absolute;
+    top: 10px;
+    transition: width .1s linear;
+}
+
+div.task.done span:before {
+    width: 100%;
+}
+
+h1,
+h2 {
+    text-align: center;
+}
+
+div.checkbox {
+    display: flex;
+    align-items: center;
+}
+
+button.trash {
+    background: none;
+    border: none;
+    display: flex;
+    cursor: pointer;
+}
+
+button.trash svg {
+    fill: #888;
+    height: 14px;
+}
+
+div.task input {
+    border: 2px solid #555;
+    border-radius: 5px;
+    padding: 2px 4px;
+}

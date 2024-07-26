@@ -10,44 +10,47 @@ const TodoItem = ({ todo, updateTodo, deleteTodo }) => {
     };
 
     const handleSave = () => {
-        updateTodo(todo.id, { ...todo, text: updatedText, priority: priority });
+        updateTodo(todo.id, { ...todo, text: updatedText, priority });
         setIsEditing(false);
     };
 
     return (
-        <li>
+        <li className="todo-item">
+            <input
+                type="checkbox"
+                checked={todo.completed}
+                onChange={handleToggleComplete}
+            />
             {isEditing ? (
-                <div>
+                <div className="todo-details">
                     <input
                         type="text"
                         value={updatedText}
                         onChange={(e) => setUpdatedText(e.target.value)}
                     />
                     <select value={priority} onChange={(e) => setPriority(e.target.value)}>
+                        <option value="None">None</option>
                         <option value="Low">Low</option>
                         <option value="Medium">Medium</option>
                         <option value="High">High</option>
                     </select>
                 </div>
             ) : (
-                <div>
-                    <input
-                        type="checkbox"
-                        checked={todo.completed}
-                        onChange={handleToggleComplete}
-                    />
+                <div className="todo-details">
                     <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
                         {todo.text}
                     </span>
-                    <span>({todo.priority})</span>
+                    <span>{todo.priority}</span>
                 </div>
             )}
-            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-            {isEditing ? (
-                <button onClick={handleSave}>Save</button>
-            ) : (
-                <button onClick={() => setIsEditing(true)}>Edit</button>
-            )}
+            <div className="todo-actions">
+                {isEditing ? (
+                    <button onClick={handleSave}>Save</button>
+                ) : (
+                    <button onClick={() => setIsEditing(true)}>Edit</button>
+                )}
+                <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+            </div>
         </li>
     );
 };
