@@ -6,10 +6,22 @@ import './App.css'
 
 const App = () => {
     const [todos, setTodos] = useState([]);
+    const [darkMode, setDarkMode] = useState(false);
 
     useEffect(() => {
         fetchTodos();
     }, []);
+
+    const toggleDarkMode = () => {
+        setDarkMode(!darkMode);
+        if (!darkMode) {
+            document.body.classList.add('dark-mode');
+            document.body.classList.remove('light-mode');
+        } else {
+            document.body.classList.add('light-mode');
+            document.body.classList.remove('dark-mode');
+        }
+    };
 
     const fetchTodos = async () => {
         const response = await getTodos();
@@ -32,8 +44,11 @@ const App = () => {
     };
 
     return (
-        <div className="App">
-            <h1>To-Do List</h1>
+        <div className={`App ${darkMode ? 'dark-mode' : 'light-mode'}`}>
+            <button onClick={toggleDarkMode} className="mode-toggle">
+                {darkMode ? 'Light Mode' : 'Dark Mode'}
+            </button>
+            <h1 className='App-name'>To-Do List</h1>
             <TodoForm addTodo={handleAddTodo} />
             <TodoList todos={todos} updateTodo={handleUpdateTodo} deleteTodo={handleDeleteTodo} />
         </div>

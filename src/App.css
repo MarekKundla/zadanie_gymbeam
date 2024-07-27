@@ -1,18 +1,59 @@
-/* App.jsx */
+/* App */
 
 * {
     box-sizing: border-box;
 }
 
 body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+body.dark-mode {
     background-color: #17181f;
     color: #ddd;
 }
 
+body.light-mode {
+    background-color: #fff;
+    color: #17181f;
+}
+
 .App {
-    max-width: 600px;
+    max-width: 800px;
     margin: 20px auto;
+    border-radius: 10px;
+    padding: 20px;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.App-name {
+    text-align: center;
+}
+
+.dark-mode .App {
+    background-color: #17181f;
+    color: #ddd;
     border: 3px solid #fff;
+}
+
+.light-mode .App {
+    background-color: #fff;
+    color: #17181f;
+    border: 3px solid #17181f;
+}
+
+/* Mode Toggle Button */
+
+.mode-toggle {
+    background-color: #61DAFB;
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
 }
 
 /* Form */
@@ -23,57 +64,90 @@ form {
     padding: 10px;
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 form input[type="text"] {
     background: none;
-    color: #fff;
+    font-size: 20px;
     border: 0;
     padding: 0 8px;
     display: block;
-    width: 100%;
+    flex: 1;
+    min-width: 150px;
 }
 
 form input[type="text"]:focus {
     outline: none;
 }
 
-select {
-    background-color: transparent;
+.dark-mode form input[type="text"] {
     color: #fff;
-    border: 1px solid #3b3c4c;
-    padding: 0 8px;
-    display: block;
 }
 
-option {
-    background-color: #000;
+.light-mode form input[type="text"] {
+    color: #000;
+}
+
+select {
+    background-color: transparent;
+    border: 1px solid #3b3c4c;
+    padding: 0 8px;
+    min-width: 100px;
+}
+
+.dark-mode select {
+    color: #fff;
+}
+
+.light-mode select {
+    color: #000;
+    border-color: #000;
+}
+
+.dark-mode option {
+    background-color: #3b3c4c;
+}
+
+.light-mode option {
+    background-color: #fff;
 }
 
 form button {
     background-color: #61DAFB;
     border: 0;
-    border-radius: 3px;
+    border-radius: 10px;
     cursor: pointer;
 }
 
 /* List */
 
+.todo-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 30px 10px 30px;
+    border-bottom: 2px solid #ddd;
+    font-weight: bold;
+    flex-wrap: wrap;
+}
+
+.dark-mode .todo-header {
+    color: #ddd;
+}
+
+.light-mode .todo-header {
+    color: #17181f;
+}
+
+.sortable {
+    cursor: pointer;
+}
+
 ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
-
-li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-
-
 
 .todo-item {
     display: flex;
@@ -81,6 +155,22 @@ li {
     align-items: center;
     padding: 10px;
     border-bottom: 1px solid #ddd;
+    flex-wrap: nowrap;
+    /* Umožni horizontálny posuv */
+    overflow-x: auto;
+    /* Pridaj posuvník, keď sa obsah nevejde */
+    box-sizing: border-box;
+    /* Zabezpeč, že padding a border sú zahrnuté v šírke */
+}
+
+.dark-mode .todo-item {
+    color: #ddd;
+    border-color: #ddd;
+}
+
+.light-mode .todo-item {
+    color: #17181f;
+    border-color: #17181f;
 }
 
 .todo-details {
@@ -88,16 +178,57 @@ li {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-right: 10px;
+    max-width: calc(100% - 100px);
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-right: 50px;
+    overflow: hidden;
+}
+
+.todo-details input[type="text"] {
+    background: none;
+    border: 0;
+    padding: 0;
+    flex: 1;
+}
+
+.todo-details input[type="text"]:focus {
+    outline: none;
+}
+
+.dark-mode .todo-details input[type="text"] {
+    color: #fff;
+}
+
+.light-mode .todo-details input[type="text"] {
+    color: #000;
+}
+
+.todo-details-name {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+    display: inline-block;
 }
 
 .todo-details span {
     flex: 1;
+    min-width: 80px;
 }
 
 .todo-details select {
+    flex: 1;
     width: auto;
-    margin-left: 10px;
+}
+
+.dark-mode .todo-details select {
+    color: #fff;
+}
+
+.light-mode .todo-details select {
+    background-color: transparent;
+    color: #000;
 }
 
 .todo-actions {
@@ -108,7 +239,7 @@ li {
 .todo-actions button {
     background-color: #61DAFB;
     border: 0;
-    border-radius: 3px;
+    border-radius: 10px;
     cursor: pointer;
     padding: 5px 10px;
 }
@@ -117,104 +248,27 @@ input[type="checkbox"] {
     margin-right: 10px;
 }
 
-@media (max-width: 600px) {
+/* small mobile */
+
+@media (max-width: 700px) {
+    .todo-details {
+        flex-wrap: nowrap;
+        /* Zabezpeč horizontálny posuv */
+    }
+}
+
+/* extra small mobile */
+
+@media (max-width: 480px) {
     .App {
         padding: 10px;
+        margin: 10px auto;
+        border: 1px solid #fff;
+        border-radius: 10px;
     }
 
-    .todo-item {
-        flex-direction: column;
-        align-items: flex-start;
+    form input[type="text"] {
+        font-size: 16px;
+        padding: 0 4px;
     }
-
-    .todo-details {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    input[type="text"],
-    select,
-    button {
-        width: 100%;
-        margin: 5px 0;
-    }
-}
-
-
-
-
-
-
-
-
-div.task {
-    background-color: #30313D;
-    border-radius: 10px;
-    padding: 5px 9px;
-    margin-top: 5px;
-    display: flex;
-    align-items: center;
-    transition: opacity .3s linear;
-}
-
-div.task svg {
-    height: 20px;
-    margin-right: 6px;
-    fill: #61DAFB;
-}
-
-div.task.done {
-    opacity: 0.3;
-}
-
-div.task-name,
-div.task form {
-    flex-grow: 1;
-}
-
-div.task span {
-    position: relative;
-}
-
-div.task span:before {
-    content: '';
-    display: block;
-    width: 0;
-    height: 1px;
-    background-color: #ddd;
-    position: absolute;
-    top: 10px;
-    transition: width .1s linear;
-}
-
-div.task.done span:before {
-    width: 100%;
-}
-
-h1,
-h2 {
-    text-align: center;
-}
-
-div.checkbox {
-    display: flex;
-    align-items: center;
-}
-
-button.trash {
-    background: none;
-    border: none;
-    display: flex;
-    cursor: pointer;
-}
-
-button.trash svg {
-    fill: #888;
-    height: 14px;
-}
-
-div.task input {
-    border: 2px solid #555;
-    border-radius: 5px;
-    padding: 2px 4px;
 }

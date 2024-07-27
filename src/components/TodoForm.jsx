@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
+import AddIcon from '@mui/icons-material/Add';
 
 const TodoForm = ({ addTodo }) => {
     const [text, setText] = useState('');
-    const [priority, setPriority] = useState('None');
+    const [priority, setPriority] = useState('Low');
+    // const [dueDate, setDueDate] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        // addTodo({ text, completed: false, priority, dueDate });
         addTodo({ text, completed: false, priority });
         setText('');
         setPriority('Low');
+        // setDueDate('');
     };
 
     return (
@@ -21,12 +25,18 @@ const TodoForm = ({ addTodo }) => {
                 required
             />
             <select value={priority} onChange={(e) => setPriority(e.target.value)}>
-                <option value="None">None</option>
                 <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
                 <option value="High">High</option>
             </select>
-            <button type="submit">+</button>
+            {/* <input
+                type="date"
+                value={dueDate}
+                onChange={(e) => setDueDate(e.target.value)}
+            /> */}
+            <button type="submit">
+                <AddIcon />
+            </button>
         </form>
     );
 };
