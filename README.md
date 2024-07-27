@@ -10,9 +10,10 @@
 
 Pred začatím inštalácie sa uisti, že máš nainštalované nasledovné:
 
-[mui_icons](https://mui.com/material-ui/getting-started/installation/)
+[mui_icons](https://mui.com/material-ui/getting-started/installation/)\
 [axios](https://www.npmjs.com/package/axios)
 
 ## Spustenie
 
-run `npm start`
+run `npm i axios @mui/icons-material @mui/material @emotion/styled @emotion/react`
+after that run `npm start`
